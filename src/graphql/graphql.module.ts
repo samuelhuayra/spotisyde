@@ -1,5 +1,17 @@
 import { Module } from '@nestjs/common';
-// import { AppResolver } from './app/app.resolver';
+import { GraphQLModule } from '@nestjs/graphql';
+import { AppResolver } from './app/app.resolver';
 
-@Module({})
-export class GraphqlModule {}
+@Module({
+    imports: [
+        GraphQLModule.forRoot({
+            debug: true,
+            playground: true,
+            typePaths: ['./**/*.graphql']
+        })
+    ],
+    providers:[
+        AppResolver
+    ]
+})
+export class GraphqlModule { }
