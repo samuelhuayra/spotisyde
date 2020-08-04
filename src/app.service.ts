@@ -71,10 +71,19 @@ export class AppService {
                     </div>
                     <div style='display: flex;justify-content: center;align-items: center;height: 100%;'>
                         <a href="javascript:window.location.href=window.location.href+'api'"
-                            style='opacity: 0.78;background-color: #00ca4c;border-color: #00ca4c;    border-radius: 50px;padding-left: 40px;padding-right: 40px;border-bottom: 2px solid transparent;    color: #fff;display: inline-block;font-weight: 300;text-align: center;white-space: nowrap;vertical-align: middle;user-select: none;border: 1px solid transparent;transition: all .15s ease-in-out;padding-top: 5px;padding-bottom: 5px;text-decoration: none;'>
+                            style='opacity: 0.78;background-color: #00ca4c;border-color: #00ca4c; width: 265.130px; height: 30px; border-radius: 50px;padding-left: 40px;padding-right: 40px;border-bottom: 2px solid transparent;    color: #fff;display: inline-block;font-weight: 300;text-align: center;white-space: nowrap;vertical-align: middle;user-select: none;border: 1px solid transparent;transition: all .15s ease-in-out;padding-top: 5px;padding-bottom: 5px;text-decoration: none;'>
                             <span
                                 style="font-family: Lucida Console;font-size: 20px!important;color: #fff;line-height: 1.5;font-weight: 300;">
                                 API DOCUMENTATION ${this.getVersion()}
+                            </span>
+                        </a>
+                    </div>
+                    <div style='display: flex;justify-content: center;align-items: center;height: 100%;'>
+                        <a href="javascript:window.location.href=window.location.href+'graphql'"
+                            style='opacity: 0.78;background-color: #4f66e6;border-color: #4f66e6; width: 265.130px; height: 30px; margin-top: 4px; border-radius: 50px;padding-left: 40px;padding-right: 40px;border-bottom: 2px solid transparent;    color: #fff;display: inline-block;font-weight: 300;text-align: center;white-space: nowrap;vertical-align: middle;user-select: none;border: 1px solid transparent;transition: all .15s ease-in-out;padding-top: 5px;padding-bottom: 5px;text-decoration: none;'>
+                            <span
+                                style="font-family: Lucida Console;font-size: 20px!important;color: #fff;line-height: 1.5;font-weight: 300;">
+                                GRAPHQL ${this.getVersion()}
                             </span>
                         </a>
                     </div>
