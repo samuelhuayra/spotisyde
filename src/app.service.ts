@@ -33,10 +33,9 @@ export class AppService {
                 background-size: cover;
                 background-repeat: no-repeat;
                 background-position: center bottom;
-                padding-bottom: 10vh;
-                position: absolute;top: 0;bottom: 0;left: 0;right: 0position: absolute;top: 0;bottom: 0;left: 0;right: 0'>
+                position: absolute;top: 0;bottom: 0;left: 0;right: 0;'>
             <div style='display: flex;justify-content: center;align-items: center;height: 100%;'>
-                <div>
+                <div style='position: fixed;'>
                     <div style='display: flex;'>
                         <h1 style='font-size: 62px;color: #fff;font-family: "Comic Sans MS", cursive, sans-serif;'>
                             ${this.getName()}
@@ -83,7 +82,7 @@ export class AppService {
             </div>
         </div>
         <div
-            style="bottom: 50px;position: fixed;right: 0;background: rgba(0,0,0,.3);z-index: 1031;border-radius: 8px 0 0 8px;text-align: center;padding-left: 20px;padding-top: 15px;padding-bottom: 15px;padding-right: 20px;font-family: Lucida Console;font-size: 20px!important;color: #fff;line-height: 1.5;font-weight: 300;">
+            style="bottom: 50px;position: fixed;right: 0;background: rgba(0,0,0,.3);z-index: 5;border-radius: 8px 0 0 8px;text-align: center;padding-left: 20px;padding-top: 15px;padding-bottom: 15px;padding-right: 20px;font-family: Lucida Console;font-size: 20px!important;color: #fff;line-height: 1.5;font-weight: 300;">
             ${this.getEnvironment()}
         </div>
     </body>
