@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { AppResolver } from './app/app.resolver';
+import { PrismaModule } from '../prisma/prisma.module';
 
 @Module({
     imports: [
@@ -8,7 +9,8 @@ import { AppResolver } from './app/app.resolver';
             debug: true,
             playground: true,
             typePaths: ['./**/*.graphql']
-        })
+        }),
+        PrismaModule
     ],
     providers:[
         AppResolver
