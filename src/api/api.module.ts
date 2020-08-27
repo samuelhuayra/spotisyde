@@ -1,11 +1,12 @@
 import { Module } from '@nestjs/common';
-import { AuthorizationModule } from './authorization/authorization.module';
-import { PrismaModule } from '../prisma/prisma.module';
+import { CoreModule } from '../core/core.module';
+import { UserController } from './user/user.controller';
+import { PostController } from './post/post.controller';
 
 @Module({
-    imports:[
-        AuthorizationModule,
-        PrismaModule
-    ]
+    imports: [
+        CoreModule
+    ],
+    controllers: [UserController, PostController]
 })
-export class ApiModule {}
+export class ApiModule { }

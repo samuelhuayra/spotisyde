@@ -7,15 +7,15 @@ import {
     PostWhereUniqueInput,
     PostWhereInput,
     PostOrderByInput,
-  } from '@prisma/client';
+} from '@prisma/client';
 
 @Injectable()
-export class PostService {
-    constructor(private prisma: PrismaService) {}
+export class PostDaoService {
+    constructor(private prisma: PrismaService) { }
 
     async post(postWhereUniqueInput: PostWhereUniqueInput): Promise<Post | null> {
         return this.prisma.post.findOne({
-          where: postWhereUniqueInput,
+            where: postWhereUniqueInput,
         });
     }
 

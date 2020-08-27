@@ -4,6 +4,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { GraphqlModule } from './graphql/graphql.module';
 import { ApiModule } from './api/api.module';
+import { CoreModule } from './core/core.module';
 
 @Module({
   imports: [
@@ -12,7 +13,8 @@ import { ApiModule } from './api/api.module';
       // envFilePath:'environments/production.env'
     }),
     ApiModule,
-    GraphqlModule
+    GraphqlModule,
+    CoreModule
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -7,12 +7,13 @@ import {
     UserWhereUniqueInput,
     UserWhereInput,
     UserOrderByInput,
-  } from '@prisma/client';
-@Injectable()
-export class UserService {
-    constructor(private prisma: PrismaService) {}
+} from '@prisma/client';
 
-    async user(userWhereUniqueInput: UserWhereUniqueInput): Promise<User | null>{
+@Injectable()
+export class UserDaoService {
+    constructor(private prisma: PrismaService) { }
+
+    async user(userWhereUniqueInput: UserWhereUniqueInput): Promise<User | null> {
         return this.prisma.user.findOne({
             where: userWhereUniqueInput
         })
@@ -35,15 +36,15 @@ export class UserService {
         })
     }
 
-    async createUser(data: UserCreateInput):Promise<User> {
+    async createUser(data: UserCreateInput): Promise<User> {
         return this.prisma.user.create({
             data
         })
     }
 
-    async updateUser(params:{
+    async updateUser(params: {
         where: UserWhereUniqueInput;
-        data:UserUpdateInput;
+        data: UserUpdateInput;
     }): Promise<User> {
         const { where, data } = params;
         return this.prisma.user.update({
@@ -52,7 +53,7 @@ export class UserService {
         })
     }
 
-    async deleteUser(where:UserWhereUniqueInput):Promise<User> {
+    async deleteUser(where: UserWhereUniqueInput): Promise<User> {
         return this.prisma.user.delete({
             where
         })
