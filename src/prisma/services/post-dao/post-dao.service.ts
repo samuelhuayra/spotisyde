@@ -1,61 +1,25 @@
+/**
+ * @author Samuel Huayra
+ * @email samuelhuayra@icloud.com
+ * @create date 2020-10-17 18:12:44
+ * @modify date 2020-10-17 18:12:44
+ * @desc [description]
+ */
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from '../../prisma/prisma.service';
 import {
-    PostUpdateInput,
     Post,
-    PostCreateInput,
     PostWhereUniqueInput,
     PostWhereInput,
-    PostOrderByInput,
+    PostCreateInput,
+    PostUpdateInput,
+    PostOrderByInput
 } from '@prisma/client';
+import { PrismaService } from '../../prisma/prisma.service';
+import { BaseDaoService } from '../base-dao/base-dao-service';
 
 @Injectable()
-export class PostDaoService {
-    constructor(private prisma: PrismaService) { }
-
-    async post(postWhereUniqueInput: PostWhereUniqueInput): Promise<Post | null> {
-        return this.prisma.post.findOne({
-            where: postWhereUniqueInput,
-        });
-    }
-
-    async posts(params: {
-        skip?: number;
-        take?: number;
-        cursor?: PostWhereUniqueInput;
-        where?: PostWhereInput;
-        orderBy?: PostOrderByInput;
-    }): Promise<Post[]> {
-        const { skip, take, cursor, where, orderBy } = params;
-        return this.prisma.post.findMany({
-            skip,
-            take,
-            cursor,
-            where,
-            orderBy,
-        });
-    }
-
-    async createPost(data: PostCreateInput): Promise<Post> {
-        return this.prisma.post.create({
-            data,
-        });
-    }
-
-    async updatePost(params: {
-        where: PostWhereUniqueInput;
-        data: PostUpdateInput;
-    }): Promise<Post> {
-        const { data, where } = params;
-        return this.prisma.post.update({
-            data,
-            where,
-        });
-    }
-
-    async deletePost(where: PostWhereUniqueInput): Promise<Post> {
-        return this.prisma.post.delete({
-            where,
-        });
+export class PostDaoService extends BaseDaoService<Post, PostWhereUniqueInput, PostWhereInput, PostCreateInput, PostUpdateInput, PostOrderByInput> {
+    constructor(private prisma: PrismaService) {
+        super(prisma.post);
     }
 }

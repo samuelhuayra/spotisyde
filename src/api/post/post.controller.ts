@@ -1,46 +1,55 @@
-import { Controller, Get, Param, Post, Body, Put, Delete } from '@nestjs/common';
+/**
+ * @author Samuel Huayra
+ * @email samuelhuayra@icloud.com
+ * @create date 2020-10-17 19:05:49
+ * @modify date 2020-10-17 19:05:49
+ * @desc PostController
+ */
+import { Controller, Get, Param, Post, Body, Put, Delete, Query, ParseIntPipe, UsePipes, ValidationPipe } from '@nestjs/common';
 import { Post as PostModel } from '@prisma/client';
 import { PostService } from 'src/core/services/post/post.service';
 import { ApiTags } from '@nestjs/swagger';
+import { PostDto, PostQueryDto } from 'src/core/services/post/dto/post-dto';
 
 @ApiTags('Post')
-@Controller('post')
+@Controller('posts')
 export class PostController {
     constructor(
         private readonly postService: PostService,
     ) { }
 
     @Get(':id')
-    async getPostById(@Param('id') id: string): Promise<PostModel> {
-        return this.postService.getPostById(Number(id));
+    async getById(@Param('id', ParseIntPipe) id: number): Promise<PostModel> {
+        return this.postService.getById(id);
     }
 
-    @Get('feed')
-    async getPublishedPosts(): Promise<PostModel[]> {
-        return this.postService.getPublishedPosts();
-    }
-
-    @Get('filtered-posts/:searchString')
-    async getFilteredPosts(
-        @Param('searchString') searchString: string,
+    @Get()
+    @UsePipes(new ValidationPipe({ transform: true, transformOptions: { enableImplicitConversion: true } }))
+    async get(
+        @Query() postQueryDto: PostQueryDto
     ): Promise<PostModel[]> {
-        return this.postService.getFilteredPosts(searchString);
+        return this.postService.get(postQueryDto);
     }
 
     @Post()
-    async createDraft(
-        @Body() postData: { title: string; content?: string; authorEmail: string },
+    @UsePipes(new ValidationPipe({ transform: true, transformOptions: { enableImplicitConversion: true } }))
+    async post(
+        @Body() postDto: PostDto
     ): Promise<PostModel> {
-        return this.postService.createDraft(postData);
+        return this.postService.createPost(postDto);
     }
 
-    @Put('publish/:id')
-    async publishPost(@Param('id') id: string): Promise<PostModel> {
-        return this.postService.publishPost(Number(id));
+    @Put(':id')
+    @UsePipes(new ValidationPipe({ transform: true, transformOptions: { enableImplicitConversion: true } }))
+    async put(
+        @Param('id', ParseIntPipe) id: number,
+        @Body() postDto: PostDto
+    ): Promise<PostModel> {
+        return this.postService.put(id, postDto);
     }
 
-    @Delete('post/:id')
-    async deletePost(@Param('id') id: string): Promise<PostModel> {
-        return this.postService.deletePost(Number(id));
+    @Delete(':id')
+    async delete(@Param('id', ParseIntPipe) id: number): Promise<PostModel> {
+        return this.postService.delete(id);
     }
 }

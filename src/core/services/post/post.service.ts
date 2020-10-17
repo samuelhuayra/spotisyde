@@ -1,57 +1,33 @@
+/**
+ * @author Samuel Huayra
+ * @email samuelhuayra@icloud.com
+ * @create date 2020-10-17 18:59:40
+ * @modify date 2020-10-17 18:59:40
+ * @desc PostService
+ */
 import { Injectable } from '@nestjs/common';
 import { Post as PostModel } from '@prisma/client';
 import { PostDaoService } from 'src/prisma/services/post-dao/post-dao.service';
+import { BaseService } from '../base/base-service';
+import { PostDto, PostQueryDto } from './dto/post-dto';
 
 @Injectable()
-export class PostService {
+export class PostService extends BaseService<PostDto,PostQueryDto,PostModel> {
     constructor(
         private readonly postDaoService: PostDaoService
-    ) { }
-
-    async getPostById(id: number): Promise<PostModel> {
-        return this.postDaoService.post({ id })
+    ) {
+        super(postDaoService);
     }
 
-    async getPublishedPosts(): Promise<PostModel[]> {
-        return this.postDaoService.posts({
-            where: { published: true },
-        })
-    }
-
-    async getFilteredPosts(searchString: string): Promise<PostModel[]> {
-        return this.postDaoService.posts({
-            where: {
-                OR: [
-                    {
-                        title: { contains: searchString },
-                    },
-                    {
-                        content: { contains: searchString },
-                    },
-                ],
-            },
-        })
-    }
-
-    async createDraft(postData: { title: string; content?: string; authorEmail: string }): Promise<PostModel> {
-        const { title, content, authorEmail } = postData;
-        return this.postDaoService.createPost({
+    async createPost(postDto: PostDto): Promise<PostModel> {
+        const { title, content, published, authorId } = postDto;
+        return this.postDaoService.create({
             title,
             content,
+            published,
             User: {
-                connect: { email: authorEmail },
-            },
+                connect: { id: authorId }
+            }
         })
-    }
-
-    async publishPost(id: number): Promise<PostModel> {
-        return this.postDaoService.updatePost({
-            where: { id },
-            data: { published: true },
-        })
-    }
-
-    async deletePost(id: number): Promise<PostModel> {
-        return this.postDaoService.deletePost({ id })
     }
 }
