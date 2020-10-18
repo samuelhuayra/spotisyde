@@ -1,7 +1,8 @@
 import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
-import { AppResolver } from './app/app.resolver';
 import { CoreModule } from '../core/core.module';
+import { UserResolver } from './user/user.resolver';
+import { PostResolver } from './post/post.resolver';
 
 @Module({
     imports: [
@@ -13,7 +14,8 @@ import { CoreModule } from '../core/core.module';
         CoreModule
     ],
     providers:[
-        AppResolver
+        UserResolver,
+        PostResolver
     ]
 })
 export class GraphqlModule { }

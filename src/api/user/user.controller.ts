@@ -22,6 +22,7 @@ export class UserController {
     async getById(@Param('id', ParseIntPipe) id: number): Promise<UserModel> {
         return this.userService.getById(id);
     }
+    
     @Get()
     @UsePipes(new ValidationPipe({transform: true, transformOptions: {enableImplicitConversion: true}}))
     async get(

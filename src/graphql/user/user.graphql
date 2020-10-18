@@ -1,0 +1,17 @@
+type User {
+    id: Int
+    name: String
+    email: String
+}
+
+input UserQuery {
+    id: Int
+    name: String
+    email: String
+} 
+
+type Query {
+    usersGetById(id: ID!): User
+    usersGet(userQuery: UserQuery): [User]
+    
+}
