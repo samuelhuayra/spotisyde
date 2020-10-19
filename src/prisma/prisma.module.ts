@@ -5,6 +5,6 @@ import { PostDaoService } from './services/post-dao/post-dao.service';
 
 @Module({
   providers: [PrismaService, UserDaoService, PostDaoService],
-  exports:[UserDaoService, PostDaoService]
+  exports: [UserDaoService, PostDaoService]
 })
 export class PrismaModule { }

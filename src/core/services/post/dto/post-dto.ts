@@ -1,52 +1,67 @@
-/**
- * @author Samuel Huayra
- * @email samuelhuayra@icloud.com
- * @create date 2020-10-17 18:55:46
- * @modify date 2020-10-17 18:55:46
- * @desc Generic PostDto
- */
-import { ApiProperty, ApiPropertyOptional,  } from "@nestjs/swagger";
+import { ArgsType, Field, Int, ObjectType } from "@nestjs/graphql";
+import { ApiProperty, ApiPropertyOptional, } from "@nestjs/swagger";
 import { IsBoolean, IsNotEmpty, IsNumber, IsOptional } from "class-validator";
 
-abstract class Post {
-    protected abstract title :string;
-    protected abstract content :string;
-    protected abstract published :boolean;
-    protected abstract authorId :number;
+abstract class PostModel {
+    protected id: number
+    protected abstract title: string
+    protected abstract content: string
+    protected abstract published: boolean
+    protected abstract authorId: number
 }
 
-export class PostDto extends Post {
-    @ApiProperty()
-    @IsNotEmpty()
-    title :string;
-    @ApiProperty()
-    @IsNotEmpty()
-    content :string;
-    @ApiProperty({required:false})
-    @IsOptional()
-    @IsBoolean()
-    published :boolean;
-    @ApiProperty({required:false})
-    @IsOptional()
-    @IsNumber()
-    authorId :number;
+@ObjectType({ description: 'GraphQL Post Model' })
+export class Post extends PostModel {
+    @Field(() => Int, { description: `Post's Id` })
+    id: number
+    @Field({ description: `Post's title` })
+    title: string
+    @Field({ description: `Post's content` })
+    content: string
+    @Field({ description: `Post's status` })
+    published: boolean
+    @Field(() => Int, { description: `User's Id` })
+    authorId: number
 }
 
-export class PostQueryDto extends Post {
+export class PostDto extends PostModel {
+    @ApiProperty()
+    @IsNotEmpty()
+    title: string
+    @ApiProperty()
+    @IsNotEmpty()
+    content: string
+    @ApiProperty({ required: false })
+    @IsOptional()
+    @IsBoolean()
+    published: boolean
+    @ApiProperty({ required: false })
+    @IsOptional()
+    @IsNumber()
+    authorId: number
+}
+
+@ArgsType()//GraphQL
+export class PostArgs extends PostModel {
     @ApiPropertyOptional()
     @IsOptional()
     @IsNumber()
-    id :number;
+    @Field(() => Int, { nullable: true })
+    id: number
     @ApiPropertyOptional()
-    title :string;
+    @Field({ nullable: true })
+    title: string
     @ApiPropertyOptional()
-    content :string;
+    @Field({ nullable: true })
+    content: string
     @ApiPropertyOptional()
     @IsOptional()
     @IsBoolean()
-    published :boolean;
+    @Field({ nullable: true })
+    published: boolean
     @ApiPropertyOptional()
     @IsOptional()
     @IsNumber()
-    authorId :number;
+    @Field(() => Int, { nullable: true })
+    authorId: number
 }

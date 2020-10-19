@@ -3,22 +3,22 @@ import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class AppService {
-  constructor(private configService: ConfigService) { }
+    constructor(private configService: ConfigService) { }
 
-  getName(): string {
-    return this.configService.get<string>('NAME', 'Spotisyde');
-  }
+    getName(): string {
+        return this.configService.get<string>('NAME', 'Spotisyde')
+    }
 
-  getVersion(): string {
-    return `v${this.configService.get<string>('VERSION', '1.0')}`;
-  }
+    getVersion(): string {
+        return `v${this.configService.get<string>('VERSION', '1.0')}`
+    }
 
-  getEnvironment(): string {
-    return `${this.configService.get<string>('ENVIRONMENT', 'NOT FOUND')}`;
-  }
+    getEnvironment(): string {
+        return `${this.configService.get<string>('ENVIRONMENT', 'NOT FOUND')}`
+    }
 
-  getHome(): any {
-    return `<!DOCTYPE html>
+    getHome(): any {
+        return `<!DOCTYPE html>
     <html lang="en">
     <head>
         <meta charset="UTF-8">
@@ -95,6 +95,6 @@ export class AppService {
             ${this.getEnvironment()}
         </div>
     </body>
-    </html>`;
-  }
+    </html>`
+    }
 }

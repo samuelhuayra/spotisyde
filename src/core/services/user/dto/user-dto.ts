@@ -1,37 +1,50 @@
-/**
- * @author Samuel Huayra
- * @email samuelhuayra@icloud.com
- * @create date 2020-10-17 18:56:13
- * @modify date 2020-10-17 18:56:13
- * @desc Generic UserDto
- */
+import { ArgsType, Field, Int, ObjectType } from "@nestjs/graphql";
 import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger";
 import { IsEmail, IsNotEmpty, IsNumber, IsOptional } from "class-validator";
+import { Post } from "../../post/dto/post-dto";
 
-abstract class User {
-    protected abstract name: string;
-    protected abstract email: string;
+abstract class UserModel {
+    protected id: number
+    protected abstract name: string
+    protected abstract email: string
 }
 
-export class UserDto extends User{
+@ObjectType({ description: 'GraphQL User Model' })
+export class User extends UserModel {
+    @Field(() => Int, { description: `User's Id`, nullable: true })
+    id: number
+    @Field({ description: `User's name` })
+    name: string
+    @Field({ description: `User's email` })
+    email: string
+    @Field(() => [Post], { nullable: 'itemsAndList', description: `User's posts` })
+    posts?: Post[]
+}
+
+//Open API
+export class UserDto extends UserModel {
     @ApiProperty()
     @IsNotEmpty()
-    name: string;
+    name: string
     @ApiProperty()
     @IsNotEmpty()
     @IsEmail()
-    email: string;
+    email: string
 }
 
-export class UserQueryDto extends User{
+@ArgsType()//GraphQL
+export class UserQueryDto extends UserModel {
     @ApiPropertyOptional()
     @IsOptional()
     @IsNumber()
-    id: number;
+    @Field(() => Int, { nullable: true })
+    id: number
     @ApiPropertyOptional()
-    name: string;
+    @Field({ nullable: true })
+    name: string
     @ApiPropertyOptional()
     @IsOptional()
     @IsEmail()
-    email: string;
+    @Field({ nullable: true })
+    email: string
 }

@@ -5,10 +5,10 @@ import { ApiTags } from '@nestjs/swagger';
 @ApiTags('Spotisyde')
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(private readonly appService: AppService) { }
 
   @Get()
-  getHome():any {
-    return this.appService.getHome();
+  getHome(): any {
+    return this.appService.getHome()
   }
 }

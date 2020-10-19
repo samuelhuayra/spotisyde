@@ -1,0 +1,43 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+"""GraphQL Post Model"""
+type Post {
+  """User's Id"""
+  authorId: Int!
+
+  """Post's content"""
+  content: String!
+
+  """Post's Id"""
+  id: Int!
+
+  """Post's status"""
+  published: Boolean!
+
+  """Post's title"""
+  title: String!
+}
+
+type Query {
+  post(id: Float!): Post!
+  posts(authorId: Int, content: String, id: Int, published: Boolean, title: String): [Post!]!
+  user(id: Float!): User!
+  users(email: String, id: Int, name: String): [User!]!
+}
+
+"""GraphQL User Model"""
+type User {
+  """User's email"""
+  email: String!
+
+  """User's Id"""
+  id: Int
+
+  """User's name"""
+  name: String!
+
+  """User's posts"""
+  posts: [Post]
+}

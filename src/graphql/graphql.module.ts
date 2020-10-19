@@ -3,17 +3,17 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { CoreModule } from '../core/core.module';
 import { UserResolver } from './user/user.resolver';
 import { PostResolver } from './post/post.resolver';
+import { join } from 'path';
 
 @Module({
     imports: [
         GraphQLModule.forRoot({
-            debug: true,
-            playground: true,
-            typePaths: ['./**/*.graphql']
+            autoSchemaFile: join(process.cwd(), 'src/graphql/schema.gql'),
+            sortSchema: true
         }),
         CoreModule
     ],
-    providers:[
+    providers: [
         UserResolver,
         PostResolver
     ]

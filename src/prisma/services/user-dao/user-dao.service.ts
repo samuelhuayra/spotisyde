@@ -13,6 +13,6 @@ import { BaseDaoService } from '../base-dao/base-dao-service';
 @Injectable()
 export class UserDaoService extends BaseDaoService<User, UserWhereUniqueInput, UserWhereInput, UserCreateInput, UserUpdateInput, UserOrderByInput>{
     constructor(private prisma: PrismaService) {
-        super(prisma.user);
+        super(prisma.user)
     }
 }

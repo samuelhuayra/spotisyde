@@ -1,10 +1,3 @@
-/**
- * @author Samuel Huayra
- * @email samuelhuayra@icloud.com
- * @create date 2020-10-17 18:12:44
- * @modify date 2020-10-17 18:12:44
- * @desc [description]
- */
 import { Injectable } from '@nestjs/common';
 import {
     Post,
@@ -20,6 +13,6 @@ import { BaseDaoService } from '../base-dao/base-dao-service';
 @Injectable()
 export class PostDaoService extends BaseDaoService<Post, PostWhereUniqueInput, PostWhereInput, PostCreateInput, PostUpdateInput, PostOrderByInput> {
     constructor(private prisma: PrismaService) {
-        super(prisma.post);
+        super(prisma.post)
     }
 }
